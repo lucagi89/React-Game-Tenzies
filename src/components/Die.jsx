@@ -4,15 +4,20 @@ import './Die.css'
 
 function Die(props) {
   // const [value, setValue] = useState(1)
+
+  const styles = {
+    backgroundColor: props.isHeld ? "#59E391" : "#FFFFFF"
+  }
   return (
-    <div className="die">
+    <div className= "die" style={styles}>
       {props.value}
     </div>
   )
 }
 
 Die.propTypes = {
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
+  isHeld: PropTypes.bool.isRequired
 }
 
 export default Die

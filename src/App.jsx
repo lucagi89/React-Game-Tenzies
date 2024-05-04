@@ -6,7 +6,9 @@ function App() {
   return (
     <>
       <main>
-        <div className="game"></div>
+        <div className="game">
+          <div className="dice-container"></div>
+        </div>
       </main>
     </>
   )

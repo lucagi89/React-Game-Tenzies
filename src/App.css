@@ -15,8 +15,10 @@ main{
 .game{
   width:100%;
   margin: 0 auto;
+  padding:30px;
   height:500px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #F5F5F5;
@@ -30,4 +32,16 @@ main{
   grid-template: repeat(2, 1fr) / repeat(5, 1fr);
   gap: 25px;
   padding: 40px;
+}
+
+.roll-btn{
+  width: 100px;
+  height: 50px;
+  background-color: #0B2434;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-top: 20px;
 }

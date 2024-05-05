@@ -15,7 +15,15 @@ function App() {
   }
 
   const holdDice = (id) => {
-    console.log(id)
+    setDice((oldDice) => {
+      const newDice = oldDice.map(die => {
+        if (die.id === id){
+          return {...die, isHeld: !die.isHeld }
+        }
+        return die
+      })
+      return newDice
+    })
   }
 
 
@@ -25,8 +33,8 @@ function App() {
       key={index}
       value={die.value}
       isHeld={die.isHeld}
-      holdDice={holdDice}
-      id={die.id}/>
+      holdDice={() => holdDice(die.id)}
+    />
   ))
 
   return (

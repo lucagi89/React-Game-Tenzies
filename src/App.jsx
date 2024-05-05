@@ -19,10 +19,15 @@ function App() {
   }
 
   const [dice, setDice] = useState(allNewDice())
-  const [ tenzies, setTenzies] = useState(false)
+  const [tenzies, setTenzies] = useState(false)
 
   useEffect(() => {
-    console.log("state changed")
+    const checks = dice.every(die => {
+      return die.value === dice[0].value && die.isHeld === true
+    })
+    if (checks) {
+      setTenzies(true)
+    }
   }, [dice])
 
   const holdDice = (id) => {
@@ -55,6 +60,15 @@ function App() {
     />
   ))
 
+  const setDiceSequence = () => {
+    if(tenzies) {
+      setDice(allNewDice())
+    } else {
+      rollDice()
+    }
+  }
+
+
   return (
     <>
       <main>
@@ -62,8 +76,9 @@ function App() {
           <div className="dice-container">
             {diceComponents}
           </div>
-          <button className="roll-btn" onClick={rollDice}>
-            Roll
+
+          <button className="roll-btn" onClick={setDiceSequence}>
+            {tenzies ? "New Game" : "Roll"}
           </button>
         </div>
       </main>

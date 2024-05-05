@@ -14,6 +14,7 @@ main{
 
 .game{
   width:100%;
+  max-width: 700px;
   margin: 0 auto;
   padding:30px;
   height:500px;
@@ -35,8 +36,7 @@ main{
 }
 
 .roll-btn{
-  width: 100px;
-  height: 50px;
+  padding: 15px 40px;
   background-color: #0B2434;
   color: #F5F5F5;
   border: none;

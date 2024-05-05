@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Die from './components/Die'
+import Confettino from './components/Confettino'
 import {nanoid} from 'nanoid'
 
 
@@ -40,6 +41,7 @@ function App() {
     })
   }
 
+  console.log(tenzies)
 
 
   function rollDice() {
@@ -63,6 +65,7 @@ function App() {
   const setDiceSequence = () => {
     if(tenzies) {
       setDice(allNewDice())
+      setTenzies(false)
     } else {
       rollDice()
     }
@@ -72,6 +75,7 @@ function App() {
   return (
     <>
       <main>
+        {tenzies && <Confettino />}
         <div className="game">
           <div className="dice-container">
             {diceComponents}

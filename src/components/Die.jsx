@@ -9,7 +9,7 @@ function Die(props) {
     backgroundColor: props.isHeld ? "#59E391" : "#FFFFFF"
   }
   return (
-    <div className= "die" style={styles}>
+    <div className= "die" style={styles} onClick={() => props.holdDice(props.id)}>
       {props.value}
     </div>
   )
@@ -17,7 +17,8 @@ function Die(props) {
 
 Die.propTypes = {
   value: PropTypes.number.isRequired,
-  isHeld: PropTypes.bool.isRequired
+  isHeld: PropTypes.bool.isRequired,
+  holdDice: PropTypes.func.isRequired
 }
 
 export default Die

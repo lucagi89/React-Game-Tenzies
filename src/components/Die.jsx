@@ -1,9 +1,8 @@
-// import { useState } from 'react'
+
 import PropTypes from 'prop-types'
-import './Die.css'
+// import './Die.css'
 
 function Die(props) {
-  // const [value, setValue] = useState(1)
 
   const styles = {
     backgroundColor: props.isHeld ? "#59E391" : "#FFFFFF"

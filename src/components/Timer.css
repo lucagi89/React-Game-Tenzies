@@ -1,0 +1,38 @@
+.timer-container{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* border: solid red; */
+}
+
+.timer{
+  width: 100px;
+  height: 40px;
+  background-color: black;
+  font-family: "Orbitron", sans-serif;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.best-time{
+  color: rgb(0, 234, 0);
+}
+
+.time-tracker{
+  /* border: solid red; */
+  display:flex;
+  flex-direction: column;
+  gap:10px;
+  align-items: center;
+}
+
+.time-tracker h3{
+  font-family: "Orbitron", sans-serif;
+  color: black;
+  margin:0;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Die from './components/Die'
 import Confettino from './components/Confettino'
+import TimerHeader from './components/TimerHeader'
 import {nanoid} from 'nanoid'
 
 
@@ -70,6 +71,7 @@ function App() {
     <>
       <main>
         <div className="game">
+          <TimerHeader />
           {tenzies && <Confettino />}
           <h1 className="title">Tenzies</h1>
           <p className="instructions">

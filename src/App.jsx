@@ -23,16 +23,41 @@ function App() {
 
   const [dice, setDice] = useState(allNewDice())
   const [tenzies, setTenzies] = useState(false)
+  const [timeRecord, setTimeRecord] = useState(() => {
+    const savedRecord = localStorage.getItem('time-record')
+    return savedRecord ? JSON.parse(savedRecord) : 0
+  })
+  const [time, setTime] = useState(0)
 
+  const [isGameStarted, setIsGameStarted] = useState(false)
+
+
+  useEffect(() => {
+    // if (isGameStarted) {
+      const intervalId = setInterval(() => {
+        console.log("Game")
+        setTime((oldTime) => oldTime + 1)
+      }, 1000)
+
+      return () => {
+        clearInterval(intervalId)
+      }
+    // }
+  }, [tenzies])
+
+
+  // every time there is a change in the dice array, check if the game is over
   useEffect(() => {
     const checks = dice.every(die => {
       return die.value === dice[0].value && die.isHeld === true
     })
     if (checks) {
       setTenzies(true)
+      setIsGameStarted(false)
     }
   }, [dice])
 
+  // hold the dice that with the same value that have been clicked
   const holdDice = (id) => {
     setDice((oldDice) => {
       const newDice = oldDice.map(die => {
@@ -43,10 +68,19 @@ function App() {
     })
   }
 
+  const checkTimeRecord = () => {
+    if (time < timeRecord || timeRecord === 0) {
+      setTimeRecord(time)
+      localStorage.setItem('time-record', JSON.stringify(time))
+    }
+  }
+
   function rollDice() {
     if (tenzies){
+      checkTimeRecord()
       setTenzies(false)
       setDice(allNewDice())
+      setIsGameStarted(true)
     }else{
       setDice((oldDice) => {
         return oldDice.map((die) => {
@@ -71,7 +105,10 @@ function App() {
     <>
       <main>
         <div className="game">
-          <TimerHeader />
+          <TimerHeader
+          record={timeRecord}
+          time={time < 10 ? `0${time}` : time}
+          />
           {tenzies && <Confettino />}
           <h1 className="title">Tenzies</h1>
           <p className="instructions">
@@ -83,7 +120,7 @@ function App() {
           </div>
 
           <button className="roll-btn" onClick={rollDice}>
-            {tenzies ? "New Game" : "Roll"}
+            {tenzies ? "Start Game" : "Roll"}
           </button>
         </div>
       </main>

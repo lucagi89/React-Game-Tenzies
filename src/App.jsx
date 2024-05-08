@@ -27,23 +27,32 @@ function App() {
     const savedRecord = localStorage.getItem('time-record')
     return savedRecord ? JSON.parse(savedRecord) : 0
   })
-  const [time, setTime] = useState(0)
+  const [gameData, setGameData] = useState({
+    rolls: 1,
+    seconds: 0
+  })
 
-  const [isGameStarted, setIsGameStarted] = useState(false)
 
 
-  useEffect(() => {
-    // if (isGameStarted) {
-      const intervalId = setInterval(() => {
-        console.log("Game")
-        setTime((oldTime) => oldTime + 1)
+
+useEffect(() => {
+  let seconds = 0
+    if (!tenzies) {
+      setInterval(() => {
+        seconds++
+        setGameData((oldData) => {
+          return { ...oldData, seconds: seconds }
+        })
       }, 1000)
-
-      return () => {
-        clearInterval(intervalId)
-      }
-    // }
+    } else {
+      // Clear the timer if the game is not started
+      clearInterval()
+      setGameData((oldData) => {
+        return { ...oldData, seconds: seconds }
+      })
+    }
   }, [tenzies])
+
 
 
   // every time there is a change in the dice array, check if the game is over
@@ -53,7 +62,6 @@ function App() {
     })
     if (checks) {
       setTenzies(true)
-      setIsGameStarted(false)
     }
   }, [dice])
 
@@ -69,9 +77,9 @@ function App() {
   }
 
   const checkTimeRecord = () => {
-    if (time < timeRecord || timeRecord === 0) {
-      setTimeRecord(time)
-      localStorage.setItem('time-record', JSON.stringify(time))
+    if (gameData.seconds < timeRecord || timeRecord === 0) {
+      setTimeRecord(gameData.seconds)
+      localStorage.setItem('time-record', JSON.stringify(gameData.seconds))
     }
   }
 
@@ -80,7 +88,6 @@ function App() {
       checkTimeRecord()
       setTenzies(false)
       setDice(allNewDice())
-      setIsGameStarted(true)
     }else{
       setDice((oldDice) => {
         return oldDice.map((die) => {
@@ -107,7 +114,7 @@ function App() {
         <div className="game">
           <TimerHeader
           record={timeRecord}
-          time={time < 10 ? `0${time}` : time}
+          time={gameData.seconds < 10 ? `0${gameData.seconds}` : gameData.seconds}
           />
           {tenzies && <Confettino />}
           <h1 className="title">Tenzies</h1>

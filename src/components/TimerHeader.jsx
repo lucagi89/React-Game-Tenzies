@@ -23,7 +23,8 @@ function TimerHeader(props) {
 
 TimerHeader.propTypes = {
   record: PropTypes.number.isRequired,
-  time: PropTypes.number.isRequired
+  time: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+
 }
 
 

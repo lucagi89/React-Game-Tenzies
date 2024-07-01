@@ -25,7 +25,8 @@ function App() {
   const [tenzies, setTenzies] = useState(false)
   const [timeRecord, setTimeRecord] = useState(() => {
     const savedRecord = localStorage.getItem('time-record')
-    return savedRecord ? JSON.parse(savedRecord) : 0
+    const parsedRecord = savedRecord ? JSON.parse(savedRecord) : 0
+    return parsedRecord
   })
   const [gameData, setGameData] = useState({
     rolls: 1,
@@ -37,7 +38,7 @@ function App() {
 
 useEffect(() => {
   let seconds = 0
-    if (!tenzies) {
+    if (tenzies === false) {
       setInterval(() => {
         seconds++
         setGameData((oldData) => {
@@ -88,6 +89,7 @@ useEffect(() => {
       checkTimeRecord()
       setTenzies(false)
       setDice(allNewDice())
+      // setGameData({rolls: 1, seconds: 0})
     }else{
       setDice((oldDice) => {
         return oldDice.map((die) => {

@@ -4,7 +4,7 @@ import Confetti from 'react-confetti'
 function Confettino() {
   return (
     <Confetti
-      width={"500px"}
+      width={"1000px"}
       height={"1000px"}
     />
   )

@@ -36,26 +36,6 @@ function App() {
   })
 
 
-
-// Timer
-// useEffect(() => {
-//   let seconds = 0
-//     if (tenzies === false) {
-//       setInterval(() => {
-//         seconds++
-//         setGameData((oldData) => {
-//           return { ...oldData, seconds: seconds }
-//         })
-//       }, 1000)
-//     } else {
-//       // Clear the timer if the game is not started
-//       clearInterval()
-//       setGameData((oldData) => {
-//         return { ...oldData, seconds: seconds }
-//       })
-//     }
-//   }, [tenzies])
-
 useEffect(() => {
   let intervalId;
   let seconds = 0;

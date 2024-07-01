@@ -8,11 +8,13 @@ import {nanoid} from 'nanoid'
 
 function App() {
 
+  // generate a new die with a random number between 1 and 6
   const generateNewDie = () => {
     const num = Math.floor(Math.random() * 6) + 1
     return { id: nanoid(), value: num, isHeld: false }
   }
 
+  // generate 10 new dice
   const allNewDice = () => {
     const dice = []
     for (let i = 0; i < 10; i++) {
@@ -35,24 +37,39 @@ function App() {
 
 
 
+// Timer
+// useEffect(() => {
+//   let seconds = 0
+//     if (tenzies === false) {
+//       setInterval(() => {
+//         seconds++
+//         setGameData((oldData) => {
+//           return { ...oldData, seconds: seconds }
+//         })
+//       }, 1000)
+//     } else {
+//       // Clear the timer if the game is not started
+//       clearInterval()
+//       setGameData((oldData) => {
+//         return { ...oldData, seconds: seconds }
+//       })
+//     }
+//   }, [tenzies])
 
 useEffect(() => {
-  let seconds = 0
-    if (tenzies === false) {
-      setInterval(() => {
-        seconds++
-        setGameData((oldData) => {
-          return { ...oldData, seconds: seconds }
-        })
-      }, 1000)
-    } else {
-      // Clear the timer if the game is not started
-      clearInterval()
-      setGameData((oldData) => {
-        return { ...oldData, seconds: seconds }
-      })
-    }
-  }, [tenzies])
+  let intervalId;
+  let seconds = 0;
+
+  if (tenzies === false) {
+    intervalId = setInterval(() => {
+      seconds++;
+      setGameData((oldData) => ({ ...oldData, seconds: seconds }));
+    }, 1000);
+  }
+
+  // Cleanup function to clear the interval
+  return () => clearInterval(intervalId);
+}, [tenzies]);
 
 
 
